@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Angular学习笔记之与express交互 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这些天刚好看到NG与服务器端通信的的内容，这里就将我在学习过程中跑通与express4的交互过程分享一下。Demo是做了一个应用来记录用户点击特定按钮的次数，这因为是与服务端通信经常用来练习的demo。
+Express 安装1$npm install -g express-generator
+用express生成器生成express应用12$express myApp$cd myAPP $$ np">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular学习笔记之与express交互">
+<meta property="og:url" content="http://yoursite.com/2016/02/25/Angular学习笔记之与express交互/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这些天刚好看到NG与服务器端通信的的内容，这里就将我在学习过程中跑通与express4的交互过程分享一下。Demo是做了一个应用来记录用户点击特定按钮的次数，这因为是与服务端通信经常用来练习的demo。
+Express 安装1$npm install -g express-generator
+用express生成器生成express应用12$express myApp$cd myAPP $$ np">
+<meta property="og:updated_time" content="2016-02-25T02:26:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular学习笔记之与express交互">
+<meta name="twitter:description" content="这些天刚好看到NG与服务器端通信的的内容，这里就将我在学习过程中跑通与express4的交互过程分享一下。Demo是做了一个应用来记录用户点击特定按钮的次数，这因为是与服务端通信经常用来练习的demo。
+Express 安装1$npm install -g express-generator
+用express生成器生成express应用12$express myApp$cd myAPP $$ np">
+  
+  
+
+
+  <link rel="stylesheet" href="/css/styles.css" type="text/css">
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+  <div class="content-post">
+  <a class="avatar" href="/archives">
+    <img src="/images/avatar.jpg" alt="" />
+  </a>
+  <article id="post-Angular学习笔记之与express交互" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <div class="article-title article" >
+      Angular学习笔记之与express交互
+    </div>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    2016-02-25
+
+    <span> | </span>
+
+    <span class="article-author">heke</span>
+
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这些天刚好看到NG与服务器端通信的的内容，这里就将我在学习过程中跑通与express4的交互过程分享一下。Demo是做了一个应用来记录用户点击特定按钮的次数，这因为是与服务端通信经常用来练习的demo。</p>
+<h3 id="Express-安装"><a href="#Express-安装" class="headerlink" title="Express 安装"></a>Express 安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g express-generator</span><br></pre></td></tr></table></figure>
+<h3 id="用express生成器生成express应用"><a href="#用express生成器生成express应用" class="headerlink" title="用express生成器生成express应用"></a>用express生成器生成express应用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$express</span> myApp</span><br><span class="line"><span class="variable">$cd</span> myAPP $$ npm install <span class="operator">-d</span></span><br></pre></td></tr></table></figure>
+<p>在生成的文件中，找到app.js，我们需要进行一些修改，才能使用angular应用。因为我不是很熟悉jade的引擎模板，也不想使用ejs，所以我直接使用的html来作视图模板。</p>
+<h3 id="修改express中的app-js文件，在public中写index"><a href="#修改express中的app-js文件，在public中写index" class="headerlink" title="修改express中的app.js文件，在public中写index"></a>修改express中的app.js文件，在public中写index</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将引擎这部分注释掉</span></span><br><span class="line"><span class="comment">// view engine setup</span></span><br><span class="line"><span class="comment">//app.set('views', path.join(__dirname, 'views'));</span></span><br><span class="line"><span class="comment">//app.set('view engine', 'jade');</span></span><br><span class="line">app.use(express.static(path.join(__dirname, <span class="string">'public'</span>)));<span class="comment">//静态文件的存放目录，可以将应用的主html放在这里</span></span><br><span class="line"></span><br><span class="line">routes(app);</span><br><span class="line"><span class="comment">//app.use('/users', users);</span></span><br><span class="line">app.use(<span class="string">'/*'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">  res.sendfile(__dirname + <span class="string">'/public/index.html'</span>);</span><br><span class="line">&#125;);<span class="comment">//由于angular基本都是sap，所以我路由全都定位到index中去了</span></span><br></pre></td></tr></table></figure>
+<p>开发一个应用demo来记录用户点击特定按钮的次数，所以需要写两个路由GET/hits(负责返回我们点击按钮的总次数)和POST(/hit)，在routes/index.js中写下</p>
+<h3 id="在routes-index-js修改路由"><a href="#在routes-index-js修改路由" class="headerlink" title="在routes/index.js修改路由"></a>在routes/index.js修改路由</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> router=<span class="function"><span class="keyword">function</span>(<span class="params">app</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> hits=<span class="number">0</span>;</span><br><span class="line">  app.get(<span class="string">'/hits'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    res.send(<span class="number">200</span>,&#123;</span><br><span class="line">      hits:hits</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">  app.post(<span class="string">'/hit'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    hits+=<span class="number">1</span>;</span><br><span class="line">    res.send(<span class="number">200</span>,&#123;</span><br><span class="line">      hits:hits</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+<p>然后我们在public/中开发index.html基本视图。和控制器与服务等内容</p>
+<h2 id="在public中开发angular部分"><a href="#在public中开发angular部分" class="headerlink" title="在public中开发angular部分"></a>在public中开发angular部分</h2><h3 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span> <span class="attribute">ng-app</span>=<span class="value">"myApp"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">section</span> <span class="attribute">ng-view</span>&gt;</span><span class="tag">&lt;/<span class="title">section</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/ng-template"</span> <span class="attribute">id</span>=<span class="value">"index"</span>&gt;</span><span class="handlebars"><span class="xml"></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">ng-controller</span>=<span class="value">"HomeController"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="title">h3</span>&gt;</span>Button hits:</span><span class="expression">&#123;&#123; <span class="variable">hits</span> &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="title">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">button</span> <span class="attribute">ng-click</span>=<span class="value">"registerHit()"</span>&gt;</span>Hite me!<span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"></span></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"javascripts/angular.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"javascripts/angular-route.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"javascripts/services.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"javascripts/controller.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"javascripts/myapp.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="javascripts中创建myapp-js"><a href="#javascripts中创建myapp-js" class="headerlink" title="javascripts中创建myapp.js"></a>javascripts中创建myapp.js</h3><p>这部分使用了ng-route来在前端中处理路由</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    angular.module(<span class="string">'myApp'</span>,[</span><br><span class="line">        <span class="string">'ngRoute'</span>,</span><br><span class="line">        <span class="string">'controller'</span>,</span><br><span class="line">        <span class="string">'services'</span></span><br><span class="line">    ])</span><br><span class="line">        .config(<span class="function"><span class="keyword">function</span>(<span class="params">$routeProvider</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> routeConfig=&#123;</span><br><span class="line">                templateUrl:<span class="string">'index'</span></span><br><span class="line">            &#125;;</span><br><span class="line">                $routeProvider</span><br><span class="line">                .when(<span class="string">'/'</span>,routeConfig)</span><br><span class="line">                    .otherwise(&#123;redirectTo:<span class="string">'/'</span>&#125;)</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<h3 id="创建一个控制器和服务来应对路由的调用等"><a href="#创建一个控制器和服务来应对路由的调用等" class="headerlink" title="创建一个控制器和服务来应对路由的调用等"></a>创建一个控制器和服务来应对路由的调用等</h3><h4 id="controller"><a href="#controller" class="headerlink" title="controller"></a>controller</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    angular.module(<span class="string">'controller'</span>,[</span><br><span class="line">            <span class="string">'services'</span></span><br><span class="line">        ])</span><br><span class="line">        .controller(<span class="string">'HomeController'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope,HitService</span>)</span>&#123;</span><br><span class="line">            HitService.count()</span><br><span class="line">                .then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">                    $scope.hits=data;</span><br><span class="line">                &#125;)</span><br><span class="line">            $scope.registerHit=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                HitService.registerHit()</span><br><span class="line">                    .then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">                        $scope.hits=data;</span><br><span class="line">                    &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="string">``</span><span class="string">` </span><br><span class="line">服务部分</span><br><span class="line"></span><br><span class="line">#### service</span><br><span class="line"></span><br><span class="line">`</span><span class="string">``</span> javascript</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    angular.module(<span class="string">'services'</span>,[</span><br><span class="line">    ])</span><br><span class="line">        .factory(<span class="string">'HitService'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$q,$http</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> service=&#123;</span><br><span class="line">                count:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                    <span class="keyword">var</span> d=$q.defer();</span><br><span class="line">                    $http.get(<span class="string">'/hits'</span>)</span><br><span class="line">                        .success(<span class="function"><span class="keyword">function</span>(<span class="params">data,status</span>)</span>&#123;</span><br><span class="line">                            d.resolve(data.hits);</span><br><span class="line">                        &#125;).error(<span class="function"><span class="keyword">function</span>(<span class="params">data,status</span>)</span>&#123;</span><br><span class="line">                        d.reject(data);</span><br><span class="line">                    &#125;)</span><br><span class="line">                    <span class="keyword">return</span> d.promise;</span><br><span class="line">                &#125;,</span><br><span class="line">                registerHit:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                    <span class="keyword">var</span> d=$q.defer();</span><br><span class="line">                    $http.post(<span class="string">'/hit'</span> ,&#123;&#125;)</span><br><span class="line">                        .success(<span class="function"><span class="keyword">function</span>(<span class="params">data,status</span>)</span>&#123;</span><br><span class="line">                            d.resolve(data.hits);</span><br><span class="line">                        &#125;).error(<span class="function"><span class="keyword">function</span>(<span class="params">data,status</span>)</span>&#123;</span><br><span class="line">                        d.reject(data);</span><br><span class="line">                    &#125;)</span><br><span class="line">                    <span class="keyword">return</span> d.promise;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> service;</span><br><span class="line">        &#125;)</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>在这个代码中我们用的是$http与服务端交互，angular还提供另外一种非常有用的可选服务$resource供我们使用。这个服务可以创建一个资源对象，我们可以用它非常方便地同支持RESTful的服务端数据源进行交互。$resource服务还可以将$http请求转换成save和update形式<br>ngResource是一个可选的模块，我们需要安装才能引用使用它。这里就不多介绍它了。</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+  </div>
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</div>
+
+  
+<script>
+  var disqus_shortname = 'heke';
+  
+  var disqus_url = 'http://yoursite.com/2016/02/25/Angular学习笔记之与express交互/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+</body>
+</html>
