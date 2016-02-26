@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Angular学习之ui-router | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Angular有自己的内置路由模块：ngRoute。ngRoute对于小型应用来说挺ok，但面对复杂型应用便会有些力不从心，所以有了ui-route这个第三方路由模块，它允许你通过状态机组织接口，而不是简单的URL路由。
+ui-router提供哪些指令和服务
+指令和服务
+
+$urlRouterProvider(服务提供者) //用来配置路由重定向
+$urlRouter(服务)
+$stateProv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular学习之ui-router">
+<meta property="og:url" content="http://yoursite.com/2016/02/26/Angular学习之ui-router/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Angular有自己的内置路由模块：ngRoute。ngRoute对于小型应用来说挺ok，但面对复杂型应用便会有些力不从心，所以有了ui-route这个第三方路由模块，它允许你通过状态机组织接口，而不是简单的URL路由。
+ui-router提供哪些指令和服务
+指令和服务
+
+$urlRouterProvider(服务提供者) //用来配置路由重定向
+$urlRouter(服务)
+$stateProv">
+<meta property="og:updated_time" content="2016-02-26T07:17:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular学习之ui-router">
+<meta name="twitter:description" content="Angular有自己的内置路由模块：ngRoute。ngRoute对于小型应用来说挺ok，但面对复杂型应用便会有些力不从心，所以有了ui-route这个第三方路由模块，它允许你通过状态机组织接口，而不是简单的URL路由。
+ui-router提供哪些指令和服务
+指令和服务
+
+$urlRouterProvider(服务提供者) //用来配置路由重定向
+$urlRouter(服务)
+$stateProv">
+  
+  
+
+
+  <link rel="stylesheet" href="/css/styles.css" type="text/css">
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+  <div class="content-post">
+  <a class="avatar" href="/archives">
+    <img src="/images/avatar.jpg" alt="" />
+  </a>
+  <article id="post-Angular学习之ui-router" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <div class="article-title article" >
+      Angular学习之ui-router
+    </div>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    2016-02-26
+
+    <span> | </span>
+
+    <span class="article-author">heke</span>
+
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Angular有自己的内置路由模块：ngRoute。ngRoute对于小型应用来说挺ok，但面对复杂型应用便会有些力不从心，所以有了ui-route这个第三方路由模块，它允许你通过状态机组织接口，而不是简单的URL路由。</p>
+<h3 id="ui-router提供哪些指令和服务"><a href="#ui-router提供哪些指令和服务" class="headerlink" title="ui-router提供哪些指令和服务"></a>ui-router提供哪些指令和服务</h3><blockquote>
+<p>指令和服务</p>
+<ul>
+<li>$urlRouterProvider(服务提供者) //用来配置路由重定向</li>
+<li>$urlRouter(服务)</li>
+<li>$stateProvider(服务提供者) //用来配置路由</li>
+<li>$state(服务) //用来显示当前路由状态信息，以及一些路由方法（如：跳转）</li>
+<li>$stateParams(服务) // 用来存储路由匹配时的参数</li>
+<li>ui-view(指令) // 路由模板渲染，对应的dom相关联</li>
+<li>ui-sref(指令)//给对应的dom添加click事件，然后根据state.name直接跳转到对应的state</li>
+</ul>
+</blockquote>
+<p>要定义路由，可以使用.config方法，和常见的方式一样，不过ui-route是讲状态设置在$stateProvider上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">.config(<span class="function"><span class="keyword">function</span>(<span class="params">$stateProvider,$urlRouteProvider</span>)</span>&#123;</span><br><span class="line">$stateProvider</span><br><span class="line">    .state(<span class="string">'index'</span>,&#123;</span><br><span class="line">     url:<span class="string">'/index'</span>,</span><br><span class="line">     templateUrl:<span class="string">'index.html'</span></span><br><span class="line">&#125;)</span><br><span class="line">)&#125;;</span><br></pre></td></tr></table></figure>
+<p>这一步给状态配置对象分配了一个名为index的状态。这个状态也有一些与路由配置对象相似的选项，来配置应用程序的状态</p>
+<h4 id="1-template、templateUrl、templateProvider"><a href="#1-template、templateUrl、templateProvider" class="headerlink" title="1.template、templateUrl、templateProvider"></a>1.template、templateUrl、templateProvider</h4><p>在每个视图上设置模板的方式有三种。</p>
+<ul>
+<li>template：一个HTML内容字符串或者返回HTML的函数</li>
+<li>templateUrl:一个模板URL路径字符串或者是返回URL路径字符串的函数（如上述例子）</li>
+<li>templateProvider:一个返回HTML内容字符串的函数</li>
+</ul>
+<h3 id="2-controller，resolve"><a href="#2-controller，resolve" class="headerlink" title="2.controller，resolve"></a>2.controller，resolve</h3><p>和ngRoute一样，可以给一个已经注册好的控制器关联一个URL，也可以创建一个控制器函数作为状态控制器</p>
+<p>我们还可以使用resolve功能解析要注入到控制器中得依赖列表。这个resolve选项就是一个对象，其中键就是要注入到控制器中得依赖名称，而其值就是待解析的factories。</p>
+<h3 id="3-url"><a href="#3-url" class="headerlink" title="3.url"></a>3.url</h3><p>url选项可以给应用程序的状态分配一个唯一的URL，例如在上述的例子中，当用户导航到/index时，应用会转到inbox状态，然后使用模板中得内容填充到ui-view指令。</p>
+<p>URL可以接受一系列不同的选项，还可以在url中设置基本的参数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$stateProvider</span><br><span class="line">    .state(<span class="string">'index'</span>,&#123;</span><br><span class="line">        url:<span class="string">'/index/:id'</span>,</span><br><span class="line">        templateUrl:<span class="string">'index.html'</span>,</span><br><span class="line">        controller:<span class="function"><span class="keyword">function</span>(<span class="params">$scope,$stateParams</span>)</span>&#123;</span><br><span class="line">        $scope.id=$stateParams.id</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">)&#125;;</span><br></pre></td></tr></table></figure>
+<p>应用会捕获作为URL第二个组成部分的：id。例如如果用户跳转到、index/1，$stateParams.id就是1.</p>
+<h3 id="4-嵌套路由"><a href="#4-嵌套路由" class="headerlink" title="4.嵌套路由"></a>4.嵌套路由</h3><p>可以使用url参数以插入路由的方式提供嵌套路由。这样可以在页面或者模板内包含多个ui-views。这个方面也是比起ngRoute更加强大的地方之一让我们可以实现嵌套视图（页面某个动态变化区块中，嵌套着另一个可以动态变化的区块）。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$stateProvider</span><br><span class="line">    .state(<span class="string">'parent'</span>, &#123;</span><br><span class="line">        abstract: <span class="literal">true</span>,</span><br><span class="line">        url: <span class="string">'/parent'</span>,</span><br><span class="line">        template: <span class="string">'I am parent &lt;div ui-view&gt;&lt;/div&gt;'</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .state(<span class="string">'parent.child'</span>, &#123;</span><br><span class="line">        url: <span class="string">'/child'</span>,</span><br><span class="line">        template: <span class="string">'I am child'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>现在/parent匹配第一个状态，而/parent/child匹配第二个状态。使用这种语法，可以在父路由中嵌套URL。父视图中得ui-view会解析子路由的视图。</p>
+<h3 id="5-views"><a href="#5-views" class="headerlink" title="5.views"></a>5.views</h3><p>ui-router的另一个强大的地方是可以在一个状态内设置多个命名视图。在独立的视图内，你可以在独立模板中定义多个要引用的视图。</p>
+<blockquote>
+<p>如果设置了views参数，那么状态的template那些就会被忽略。如果你像在路由中包含父模板，就需要创建一个包含模板的抽象状态。（abstract）</p>
+</blockquote>
+<p>比方说有一个视图：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">ui-view</span>=<span class="value">"filters"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">ui-view</span>=<span class="value">"mailbox"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">ui-view</span>=<span class="value">"priority"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>现在，可以创建命名视图来填充每个独立的模板。每个子视图都可以包含它自己的模板、控制器和resolve</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$stateProvider</span><br><span class="line">        .state(<span class="string">'home'</span>, &#123;</span><br><span class="line">            url: <span class="string">'/'</span>,</span><br><span class="line">            views: &#123;</span><br><span class="line">              <span class="string">'filters'</span>: &#123;</span><br><span class="line">                    templateUrl: <span class="string">'filters.html'</span>,</span><br><span class="line">                    controller:<span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123;&#125;</span><br><span class="line">            &#125;,</span><br><span class="line">              <span class="string">'mailbox'</span>: &#123;</span><br><span class="line">                    templateUrl: <span class="string">'mailbox.html'</span></span><br><span class="line">            &#125;,</span><br><span class="line">              <span class="string">'priority'</span>: &#123;</span><br><span class="line">                    templateUrl: <span class="string">'priority.html'</span></span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="6-abstract"><a href="#6-abstract" class="headerlink" title="6.abstract"></a>6.abstract</h3><p>可以使用抽象模板提供一个模板包装器来包裹多个命名视图，或者传递$scope对象给子节点。可以在同一url下嵌套多个路由（比如所以路由都在/index下）例如嵌套路由下得例子。抽象模板永远不能直接激活，但是可以设置被激活的子节点。</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+  </div>
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</div>
+
+  
+<script>
+  var disqus_shortname = 'hexiaoke';
+  
+  var disqus_url = 'http://yoursite.com/2016/02/26/Angular学习之ui-router/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+</body>
+</html>
