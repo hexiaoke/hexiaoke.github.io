@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于CSS文件组织和书写规范、顺序 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这些天企业导师review到我的css代码时发现了很多细节性的问题，书写规范和书写顺序都有一些问题影响了代码的阅读体验，之后看了很多代码规范的文章，这里就总结一下这些经验，也总结下学习boostrap 组织样式文件的思路和方法。
+CSS书写顺序
+位置属性(position, top, right, z-index, display, float等)
+大小(width, height, paddin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于CSS文件组织和书写规范、顺序">
+<meta property="og:url" content="http://yoursite.com/2016/03/07/关于CSS文件组织和书写规范、顺序/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这些天企业导师review到我的css代码时发现了很多细节性的问题，书写规范和书写顺序都有一些问题影响了代码的阅读体验，之后看了很多代码规范的文章，这里就总结一下这些经验，也总结下学习boostrap 组织样式文件的思路和方法。
+CSS书写顺序
+位置属性(position, top, right, z-index, display, float等)
+大小(width, height, paddin">
+<meta property="og:updated_time" content="2016-03-07T03:17:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于CSS文件组织和书写规范、顺序">
+<meta name="twitter:description" content="这些天企业导师review到我的css代码时发现了很多细节性的问题，书写规范和书写顺序都有一些问题影响了代码的阅读体验，之后看了很多代码规范的文章，这里就总结一下这些经验，也总结下学习boostrap 组织样式文件的思路和方法。
+CSS书写顺序
+位置属性(position, top, right, z-index, display, float等)
+大小(width, height, paddin">
+  
+  
+
+
+  <link rel="stylesheet" href="/css/styles.css" type="text/css">
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+  <div class="content-post">
+  <a class="avatar" href="/archives">
+    <img src="/images/avatar.jpg" alt="" />
+  </a>
+  <article id="post-关于CSS文件组织和书写规范、顺序" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <div class="article-title article" >
+      关于CSS文件组织和书写规范、顺序
+    </div>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    2016-03-07
+
+    <span> | </span>
+
+    <span class="article-author">heke</span>
+
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这些天企业导师review到我的css代码时发现了很多细节性的问题，书写规范和书写顺序都有一些问题影响了代码的阅读体验，之后看了很多代码规范的文章，这里就总结一下这些经验，也总结下学习boostrap 组织样式文件的思路和方法。</p>
+<h2 id="CSS书写顺序"><a href="#CSS书写顺序" class="headerlink" title="CSS书写顺序"></a>CSS书写顺序</h2><ol>
+<li>位置属性(position, top, right, z-index, display, float等)</li>
+<li>大小(width, height, padding, margin)</li>
+<li>文字系列(font, line-height, letter-spacing, color- text-align等)</li>
+<li>背景(background, border等)</li>
+<li>其他(animation, transition等)</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.declaration-order</span> <span class="rules">&#123;</span><br><span class="line"><span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</span><br><span class="line"><span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line"><span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line"><span class="rule"><span class="attribute">bottom</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line"><span class="rule"><span class="attribute">left</span>:<span class="value"> <span class="number">0</span></span></span>;</span><br><span class="line"><span class="rule"><span class="attribute">z-index</span>:<span class="value"> <span class="number">100</span></span></span>;</span><br><span class="line"><span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;</span><br><span class="line"><span class="rule"><span class="attribute">float</span>:<span class="value"> right</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100px</span></span></span>;</span><br><span class="line"><span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100px</span></span></span>;</span><br><span class="line"></span><br><span class="line"><span class="rule"><span class="attribute">font</span>:<span class="value"> normal <span class="number">13px</span> <span class="string">"Helvetica Neue"</span>, sans-serif</span></span>;</span><br><span class="line"><span class="rule"><span class="attribute">line-height</span>:<span class="value"> <span class="number">1.5</span></span></span>;</span><br><span class="line"><span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#333</span></span></span>;</span><br><span class="line"><span class="rule"><span class="attribute">text-align</span>:<span class="value"> center</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#f5f5f5</span></span></span>;</span><br><span class="line"><span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">1px</span> solid <span class="hexcolor">#e5e5e5</span></span></span>;</span><br><span class="line"><span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">3px</span></span></span>;</span><br><span class="line"></span><br><span class="line"><span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">1</span></span></span>;</span><br><span class="line">&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="CSS书写规范"><a href="#CSS书写规范" class="headerlink" title="CSS书写规范"></a>CSS书写规范</h2><p>关于书写规范，网上有太多这样的文章来写这些东西，我推荐一个写的比较好的规范，里面也涵盖了html的规范：[编码规范]（<a href="http://codeguide.bootcss.com/）" target="_blank" rel="external">http://codeguide.bootcss.com/）</a></p>
+<h2 id="CSS代码组织"><a href="#CSS代码组织" class="headerlink" title="CSS代码组织"></a>CSS代码组织</h2><p>之前写毕设的时候学习了下LESS，于是也去看了看bootstrap的less源码,觉得在代码组织这一块还是有很多地方值得学习的：</p>
+<ol>
+<li>以组件为单位组织代码段。</li>
+<li>制定一致的注释规范。</li>
+<li>使用一致的空白符将代码分隔成块，这样利于扫描较大的文档。</li>
+<li>如果使用了多个 CSS 文件，将其按照组件而非页面的形式分拆，因为页面会被重组，而组件只会被移动。</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//就像这样使用一个master.less文件来管理所有需要的代码，然后根据各自的功能用注释分开，在每个less文件中写好各自的部分（如变量就写变量）</span><br><span class="line">// Core variables and mixins</span><br><span class="line">@import "variables.less";</span><br><span class="line">@import "mixins.less";</span><br><span class="line"></span><br><span class="line">// Reset and dependencies</span><br><span class="line">@import "normalize.less";</span><br><span class="line">@import "print.less";</span><br><span class="line">@import "glyphicons.less";</span><br><span class="line"></span><br><span class="line">// Core CSS</span><br><span class="line">@import "scaffolding.less";</span><br><span class="line">@import "type.less";</span><br><span class="line">@import "code.less";</span><br><span class="line">@import "grid.less";</span><br><span class="line">@import "tables.less";</span><br><span class="line">@import "forms.less";</span><br><span class="line">@import "buttons.less";</span><br><span class="line"></span><br><span class="line">// Components</span><br><span class="line">@import "component-animations.less";</span><br><span class="line">@import "dropdowns.less";</span><br><span class="line">@import "button-groups.less";</span><br><span class="line">@import "input-groups.less";</span><br><span class="line">@import "navs.less";</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+
+    
+
+  </div>
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</div>
+
+  
+<script>
+  var disqus_shortname = 'hexiaoke';
+  
+  var disqus_url = 'http://yoursite.com/2016/03/07/关于CSS文件组织和书写规范、顺序/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+</body>
+</html>
