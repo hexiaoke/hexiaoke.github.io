@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于立即执行函数IIFE | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天来简单聊一聊最近写毕设用的非常多的IIFE。首先来看一段javascript
+123(function()&amp;#123;&amp;#125;)()
+这其实就是IIFE(立即执行的函数表达式)。不知道大家写这个之前会不会想这样写有什么用途？一般是用在什么地方?
+IIFE有什么用途1.总是将代码包裹成一个 IIFE(Immediately-Invoked Function Expression)，用以创建独">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于立即执行函数IIFE">
+<meta property="og:url" content="http://yoursite.com/2016/03/10/关于立即执行函数IIFE/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="今天来简单聊一聊最近写毕设用的非常多的IIFE。首先来看一段javascript
+123(function()&amp;#123;&amp;#125;)()
+这其实就是IIFE(立即执行的函数表达式)。不知道大家写这个之前会不会想这样写有什么用途？一般是用在什么地方?
+IIFE有什么用途1.总是将代码包裹成一个 IIFE(Immediately-Invoked Function Expression)，用以创建独">
+<meta property="og:updated_time" content="2016-03-10T12:31:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于立即执行函数IIFE">
+<meta name="twitter:description" content="今天来简单聊一聊最近写毕设用的非常多的IIFE。首先来看一段javascript
+123(function()&amp;#123;&amp;#125;)()
+这其实就是IIFE(立即执行的函数表达式)。不知道大家写这个之前会不会想这样写有什么用途？一般是用在什么地方?
+IIFE有什么用途1.总是将代码包裹成一个 IIFE(Immediately-Invoked Function Expression)，用以创建独">
+  
+  
+
+
+  <link rel="stylesheet" href="/css/styles.css" type="text/css">
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+  <div class="content-post">
+  <a class="avatar" href="/archives">
+    <img src="/images/avatar.jpg" alt="" />
+  </a>
+  <article id="post-关于立即执行函数IIFE" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <div class="article-title article" >
+      关于立即执行函数IIFE
+    </div>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    2016-03-10
+
+    <span> | </span>
+
+    <span class="article-author">heke</span>
+
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天来简单聊一聊最近写毕设用的非常多的IIFE。<br>首先来看一段javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<p>这其实就是<code>IIFE(立即执行的函数表达式)</code>。<br>不知道大家写这个之前会不会想这样写有什么用途？一般是用在什么地方?</p>
+<h3 id="IIFE有什么用途"><a href="#IIFE有什么用途" class="headerlink" title="IIFE有什么用途"></a>IIFE有什么用途</h3><p>1.总是将代码包裹成一个 IIFE(Immediately-Invoked Function Expression)，用以创建独立隔绝的定义域。这一举措可防止全局命名空间被污染。<br>所谓不去污染全局命名空间，是因为 IIFE 创建了一个新的函数作用域，你真正的业务代码被封装在其中，自然就不会触碰到全局对象了。如果你需要全局对象，那就 pass 给 IIFE：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">global</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 在这里，global 就是全局对象了</span></span><br><span class="line">&#125;)(<span class="keyword">this</span>)    <span class="comment">// 在浏览器里，this 就是 window 对象</span></span><br></pre></td></tr></table></figure>
+<p>2.IIFE 还可确保你的代码不会轻易被其它全局命名空间里的代码所修改（i.e. 第三方库，window 引用，被覆盖的未定义的关键字等等）。</p>
+<h3 id="IIFE一般用在什么地方"><a href="#IIFE一般用在什么地方" class="headerlink" title="IIFE一般用在什么地方"></a>IIFE一般用在什么地方</h3><p>1.无论何时，想要创建一个新的封闭的定义域，那就用 IIFE。它不仅避免了干扰，也使得内存在执行完后立即释放。</p>
+<p>2.所有脚本文件建议都从 IIFE 开始。</p>
+<h3 id="一般怎么写IIFE"><a href="#一般怎么写IIFE" class="headerlink" title="一般怎么写IIFE"></a>一般怎么写IIFE</h3><h4 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="pi">  'use strict'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Code goes here</span></span><br><span class="line"></span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">$, w, d</span>)</span>&#123;</span><br><span class="line"><span class="pi">  'use strict'</span>;</span><br><span class="line"></span><br><span class="line">  $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    w.alert(d.querySelectorAll(<span class="string">'div'</span>).length);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;(jQuery, <span class="built_in">window</span>, <span class="built_in">document</span>));</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+      
+
+    
+
+  </div>
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</div>
+
+  
+<script>
+  var disqus_shortname = 'hexiaoke';
+  
+  var disqus_url = 'http://yoursite.com/2016/03/10/关于立即执行函数IIFE/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+</body>
+</html>
