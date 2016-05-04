@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于window.onscroll事件不执行 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近在练习手写css训练，在仿写天猫首页的过程中，有一个回到顶部的特效，特效本身很好实现，当页面滑动到一定位置时，回到顶部的按钮才出现。这一特效本身可以配合JS的window.onscroll事件来实现，不过，发现我的window.onscroll事件遇上问题没有执行。于是依次排查：
+1window.onscroll=function()&amp;#123;&amp;#10;console.log(&amp;#39;ok">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于window.onscroll事件不执行">
+<meta property="og:url" content="http://yoursite.com/2016/05/04/关于window-onscroll事件不执行/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近在练习手写css训练，在仿写天猫首页的过程中，有一个回到顶部的特效，特效本身很好实现，当页面滑动到一定位置时，回到顶部的按钮才出现。这一特效本身可以配合JS的window.onscroll事件来实现，不过，发现我的window.onscroll事件遇上问题没有执行。于是依次排查：
+1window.onscroll=function()&amp;#123;&amp;#10;console.log(&amp;#39;ok">
+<meta property="og:updated_time" content="2016-05-04T13:45:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于window.onscroll事件不执行">
+<meta name="twitter:description" content="最近在练习手写css训练，在仿写天猫首页的过程中，有一个回到顶部的特效，特效本身很好实现，当页面滑动到一定位置时，回到顶部的按钮才出现。这一特效本身可以配合JS的window.onscroll事件来实现，不过，发现我的window.onscroll事件遇上问题没有执行。于是依次排查：
+1window.onscroll=function()&amp;#123;&amp;#10;console.log(&amp;#39;ok">
+  
+  
+
+
+  <link rel="stylesheet" href="/css/styles.css" type="text/css">
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+  <div class="content-post">
+  <a class="avatar" href="/archives">
+    <img src="/images/avatar.jpg" alt="" />
+  </a>
+  <article id="post-关于window-onscroll事件不执行" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <div class="article-title article" >
+      关于window.onscroll事件不执行
+    </div>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    2016-05-04
+
+    <span> | </span>
+
+    <span class="article-author">heke</span>
+
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在练习手写css训练，在仿写天猫首页的过程中，有一个回到顶部的特效，特效本身很好实现，当页面滑动到一定位置时，回到顶部的按钮才出现。这一特效本身可以配合JS的window.onscroll事件来实现，不过，发现我的window.onscroll事件遇上问题没有执行。<br>于是依次排查：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.onscroll=function()&#123;&#10;console.log(&#39;ok&#39;);//ok&#24182;&#27809;&#26377;&#25171;&#21360;&#20986;&#26469;&#65292;&#25152;&#20197;&#36825;&#20010;&#20107;&#20214;&#24182;&#27809;&#26377;&#25191;&#34892;&#20986;&#26469;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>于是我怀疑是不是其他的js影响到了它，于是把页面上所有的脚本去除，同样发现window.onscroll没有执行。最后我将CSS文件去掉，发现，可以正常的打印ok,所以，问题应该是出现在css文件中。</p>
+<p>最后依次排查，发现如果你的样式表页面最外层的元素设置了overflow的属性，便会影响window.onscroll事件的执行。</p>
+<p>具体原因的归结应该是overflow属性会影响scroll，导致无法获取scroll的位置，从而导致window.onscroll无法监听到scroll的变化而不执行。</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+  </div>
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+</div>
+
+  
+<script>
+  var disqus_shortname = 'hexiaoke';
+  
+  var disqus_url = 'http://yoursite.com/2016/05/04/关于window-onscroll事件不执行/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+</body>
+</html>
